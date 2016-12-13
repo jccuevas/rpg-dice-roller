@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+<!-- Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *	
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License
+-->
+	<ModulePrefs title="Hangout Starter">
+		<Require feature="rpc" />
+		<Require feature="views" />
+		<Require feature="locked-domain" />
+	</ModulePrefs>
+	<Content type="html"><![CDATA[     
+
+<html>
+<style type="text/css">
+<!--
+.button {
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ddd));
+  background: -moz-linear-gradient(top, #fff, #ddd);  
+  border: 1px solid #bbb;
+}
+
+.button:active {
+	background: -webkit-gradient(linear, left top, left bottom, from(#aaa), to(#333)); 
+	background: -moz-linear-gradient(bottom, #ddd, #aaa); }
+
+-->
+</style>
+<body>
+
+<script src="//plus.google.com/hangouts/_/api/v1/hangout.js"></script>
+
+<h3>Multi Dice Roller</h3>
+<h4>by Yalkom</h4>
+
+
+            <div id="rollDiv" style="float:right;background-color:beige"></div>
+<div id="dices">
+<p>
+<img style="visibility:hidden;" id="rollD4" src="http://150.214.179.213/diceapp/d4.png" alt="dice4" height="32" width="32" onClick="roll(4,1)">
+</p>
+<p>
+<img style="visibility:hidden;" id="rollD6" src="http://150.214.179.213/diceapp/d6.png" alt="dice6" height="32" width="32" onClick="roll(6,1)">
+</p>
+<p>
+<img style="visibility:hidden;" id="rollD8" src="http://150.214.179.213/diceapp/d8.png" alt="dice8" height="32" width="32" onClick="roll(8,1)">
+</p>
+<p>
+<img style="visibility:hidden;" id="rollD10" src="http://150.214.179.213/diceapp/d10.png" alt="dice10" height="32" width="32" onClick="roll(10,1)">
+</p> 
+<p>
+<img style="visibility:hidden;" id="rollD12" src="http://150.214.179.213/diceapp/d12.png" alt="dice12" height="32" width="32" onClick="roll(12,1)">
+</p>
+<p>
+<img style="visibility:hidden;" id="rollD20" src="http://150.214.179.213/diceapp/d20.png" alt="dice20" height="32" width="32" onClick="roll(20,1)">
+</p> 
+<p>
+<img style="visibility:hidden;" id="rollD100" src="http://150.214.179.213/diceapp/d100.png" alt="dice100" height="32" width="32" onClick="roll(100,1)">
+</p> 
+</div>                     
+<div id="participantsDiv"></div>
+            
+
+
+<hr>
+<div id="donate">
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+<input type="hidden" name="cmd" value="_donations">
+<input type="hidden" name="business" value="jccuevasm76@gmail.com">
+<input type="hidden" name="lc" value="ES">
+<input type="hidden" name="item_name" value="Yalkom">
+<input type="hidden" name="amount" value="1.00">
+<input type="hidden" name="currency_code" value="EUR">
+<input type="hidden" name="no_note" value="0">
+<input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHostedGuest">
+<input type="image" src="https://www.paypalobjects.com/es_ES/ES/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal. La forma rápida y segura de pagar en Internet.">
+<img alt="" border="0" src="https://www.paypalobjects.com/es_ES/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+
+            </div>          
+            
+<script>
+
+
+function showParticipants() {
+  var participants = gapi.hangout.getParticipants();
+
+  var retVal = '<p>Participants: </p><ul>';
+
+  for (var index in participants) {
+    var participant = participants[index];
+
+    if (!participant.person) {
+      retVal += '<li>A participant not running this app</li>';
+    }
+    retVal += '<li>' + participant.person.displayName + '</li>';
+  }
+
+  retVal += '</ul>';
+
+  var div = document.getElementById('rollDiv');
+
+  div.innerHTML = retVal;
+}
+            
+  function roll(sides,times) {
+ 
+
+    var retVal = '<p>'+times+'d'+sides+'=';
+
+ 
+      var ammount = Math.floor(Math.random()*sides)+1;
+       
+
+  retVal += ammount+'</p>';
+
+  var div = document.getElementById('rollDiv');
+
+  div.innerHTML = retVal;
+  
+ 
+}
+
+function init() {
+  // When API is ready...                                                         
+  gapi.hangout.onApiReady.add(
+      function(eventObj) {
+        if (eventObj.isApiReady) {
+         
+            document.getElementById('rollD4')
+            .style.visibility = 'visible';
+            document.getElementById('rollD6')
+            .style.visibility = 'visible';
+            document.getElementById('rollD8')
+            .style.visibility = 'visible';
+            document.getElementById('rollD10')
+            .style.visibility = 'visible';
+            document.getElementById('rollD12')
+            .style.visibility = 'visible';
+            document.getElementById('rollD20')
+            .style.visibility = 'visible';
+            document.getElementById('rollD100')
+            .style.visibility = 'visible';
+        }
+      });
+}
+
+// Wait for gadget to load.                                                       
+gadgets.util.registerOnLoadHandler(init);
+</script>
+</body>
+
+
+]]>
+</Content>
+</Module>
+

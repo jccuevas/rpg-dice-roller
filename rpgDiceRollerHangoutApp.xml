@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+<!-- Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *	
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License
+-->
+	<ModulePrefs title="Hangout Starter">
+		<Require feature="rpc" />
+		<Require feature="views" />
+		<Require feature="locked-domain" />
+	</ModulePrefs>
+	<Content type="html"><![CDATA[     
+
+<html>
+<style type="text/css">
+<!--
+.button {
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ddd));
+  background: -moz-linear-gradient(top, #fff, #ddd);  
+  border: 1px solid #bbb;
+}
+
+.button:active {
+	background: -webkit-gradient(linear, left top, left bottom, from(#aaa), to(#333)); 
+	background: -moz-linear-gradient(bottom, #ddd, #aaa); }
+
+-->
+#mdrBody{
+    background-color:burlywood;
+    color:white;
+    padding:5px;
+}
+
+#mdrMain{
+    height:auto;
+}
+
+#mdrH3{
+    color:white;
+    text-align: center;
+}
+
+#mdrH4{
+	margin-top:5px;
+    text-align: center;
+    color:red;
+}
+
+
+#rollDiv{
+	color:red;
+	width:inherit;
+	height:100px;
+	overflow-y:auto;
+	overflow-x:no;
+	background-color:beige;
+	padding:5px;
+}
+
+#donate{
+align:center;
+}
+
+p{
+margin-top:2px;
+margin-bottom:2px;
+}
+
+.small
+{
+text-align=center;
+font-size=x-small;
+
+}
+
+.center
+{
+margin-left:auto;
+margin-right:auto;
+width:90%;
+}
+
+</style>
+
+
+
+<body id="mdrBody">
+
+<script src="//plus.google.com/hangouts/_/api/v1/hangout.js"></script>
+
+<h3 id="mdrH3">RPG Dice Roller</h3>
+
+<div id="mdrMain">
+
+<div id="mdrDices">
+<label for="times">Times:</label><input type="number" pattern="0-9" name="times" id="times" min="1" value="1" />
+<table class="center">
+<tr><td>
+<img style="visibility:hidden;" id="rollD4" src="http://150.214.179.213/diceapp/d4.png" alt="dice4" height="32" width="32" onClick="roll(4,getTimes())">
+</td><td>
+<img style="visibility:hidden;" id="rollD6" src="http://150.214.179.213/diceapp/d6.png" alt="dice6" height="32" width="32" onClick="roll(6,getTimes())">
+</td><td>
+<img style="visibility:hidden;" id="rollD8" src="http://150.214.179.213/diceapp/d8.png" alt="dice8" height="32" width="32" onClick="roll(8,getTimes())">
+</td><td>
+<img style="visibility:hidden;" id="rollD10" src="http://150.214.179.213/diceapp/d10.png" alt="dice10" height="32" width="32" onClick="roll(10,getTimes())">
+</td></tr>
+<tr><td><p class="small">d4</p></td><td><p><small>d6</small></p></td><td><p>d8</p></td><td><p>d10</p></td></tr>
+
+
+<tr><td>
+<img style="visibility:hidden;" id="rollD12" src="http://150.214.179.213/diceapp/d12.png" alt="dice12" height="32" width="32" onClick="roll(12,getTimes())">
+</td><td>
+<img style="visibility:hidden;" id="rollD20" src="http://150.214.179.213/diceapp/d20.png" alt="dice20" height="32" width="32" onClick="roll(20,getTimes())">
+</td><td>
+<img style="visibility:hidden;" id="rollD100" src="http://150.214.179.213/diceapp/d100.png" alt="dice100" height="32" width="32" onClick="roll(100,getTimes())">
+</td><td>
+<img style="visibility:hidden;" id="rollfudge" src="http://150.214.179.213/diceapp/df.png" alt="fudgeDice" height="32" width="32" onClick="rollFudge(getTimes())">
+</td>
+
+</tr>
+<tr><td><p>d12</p></td><td><p>d20</p></td><td><p>d100</p></td><td><p>fudge</p></td></tr>
+</table> 
+</div><!-- mdrDices --> 
+<div id="rollDiv"></div>
+<input class="button" type="button" value="Clear" id="clearRolls" 
+       onClick="clearRolls()"/>
+</div><!-- mdrMain -->                           
+<div id="participantsDiv"></div>
+            
+
+
+<hr>
+<div id="donate">
+<h4 id="mdrH4">by Yalkom</h4>
+<center>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+<input type="hidden" name="cmd" value="_donations">
+<input type="hidden" name="business" value="jccuevasm76@gmail.com">
+<input type="hidden" name="lc" value="ES">
+<input type="hidden" name="item_name" value="Yalkom">
+<input type="hidden" name="amount" value="1.00">
+<input type="hidden" name="currency_code" value="EUR">
+<input type="hidden" name="no_note" value="0">
+<input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHostedGuest">
+<input type="image" src="https://www.paypalobjects.com/es_ES/ES/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal. La forma rápida y segura de pagar en Internet.">
+<img alt="" border="0" src="https://www.paypalobjects.com/es_ES/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+</center>
+</div>          
+            
+<script>
+
+var count=1;
+
+function clearRolls()
+{
+	var div = document.getElementById('rollDiv');
+
+  	div.innerHTML = "";
+	
+}
+
+function getTimes()
+{
+	var value=document.getElementById("times").value;
+	if(value<1)
+		value=1;
+	return value;
+	
+}
+
+function showParticipants() {
+  var participants = gapi.hangout.getParticipants();
+
+  var retVal = '<p>Participants: </p><ul>';
+
+  for (var index in participants) {
+    var participant = participants[index];
+
+    if (!participant.person) {
+      retVal += '<li>A participant not running this app</li>';
+    }
+    retVal += '<li>' + participant.person.displayName + '</li>';
+  }
+
+  retVal += '</ul>';
+
+  var div = document.getElementById('rollDiv');
+
+  div.innerHTML = retVal;
+}
+            
+  function roll(sides,times) {
+  
+	var retVal = '<p>'+'['+count+'] '+times+'d'+sides+'= ';
+	var ammount=0;
+	var result= "";
+	for (var n=0;n<times;n++)
+	{
+		var roll=Math.floor(Math.random()*sides)+1;
+	    ammount = ammount+roll;
+	    
+	    result=result+roll;
+	    
+	    if(times>1 && n<times-1)
+	    	result=result+'+';
+	    
+	}
+	if(times>1)
+		retVal += '<strong>'+ammount+'</strong>'+' ('+result+')</p>';
+	else
+		retVal += '<strong>'+ammount+'</strong></p>';
+		
+	var div = document.getElementById('rollDiv');
+	var content = div.innerHTML;
+	div.innerHTML = retVal+content;
+	count++;
+}
+
+function rollFudge(times) {
+	var retVal = '<p>'+'['+count+'] '+times+'df= ';
+	var ammount=0;
+	var result='';
+	for (var n=0;n<times;n++)
+	{
+    	var roll = Math.floor(Math.random()*6)+1;
+		switch(roll)
+		{
+			case 1:
+			case 2:	
+				ammount=-1;
+				result=result+" -";
+			break;
+			case 5:
+			case 6:
+				ammount=+1;
+			 	result=result+" +";
+			 	break;
+			default:
+			 	result=result+" x";
+		}
+	}
+	if(times>1)
+		retVal += '<strong>'+ammount+'</strong>'+' ('+result+')</p>';
+	else
+		retVal += '<strong>'+ammount+'</strong></p>';
+	
+	count++;
+	var div = document.getElementById('rollDiv');
+	var content = div.innerHTML;
+	div.innerHTML = retVal+content;
+   
+ //   gapi.hangout.data.sendMessage(name+" rolled "+ammount);
+ //   gapi.hangout.data.submitDelta( {'sides': sides , 'times': times} );
+}
+
+function init() {
+  // When API is ready...                                                         
+  gapi.hangout.onApiReady.add(
+      function(eventObj) {
+        if (eventObj.isApiReady) {
+         
+            document.getElementById('rollD4')
+            .style.visibility = 'visible';
+            document.getElementById('rollD6')
+            .style.visibility = 'visible';
+            document.getElementById('rollD8')
+            .style.visibility = 'visible';
+            document.getElementById('rollD10')
+            .style.visibility = 'visible';
+            document.getElementById('rollD12')
+            .style.visibility = 'visible';
+            document.getElementById('rollD20')
+            .style.visibility = 'visible';
+            document.getElementById('rollD100')
+            .style.visibility = 'visible';
+            document.getElementById('rollfudge')
+            .style.visibility = 'visible';
+            
+            
+            
+            var participant = gapi.hangout.getLocalParticipant();
+            var name = participant.person.displayName;
+ 			retVal= '<p>'+participant.person.displayName+'</p>';
+
+ 			var div = document.getElementById('participantsDiv');
+  			div.innerHTML = retVal;
+        }
+      });
+}
+
+// Wait for gadget to load.                                                       
+gadgets.util.registerOnLoadHandler(init);
+</script>
+</body>
+
+
+]]>
+</Content>
+</Module>
+

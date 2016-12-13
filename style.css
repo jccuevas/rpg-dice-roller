@@ -1,0 +1,22 @@
+#mdrBody{
+    background-color:burlywood;
+    color:white;
+    padding:5px;
+}
+
+
+
+#mdrH3{
+    color:white;
+    text-align: center;
+
+}
+
+#mdrH4{
+    text-align: center;
+    color:red;
+}
+
+#donate{
+	align:center;
+}
